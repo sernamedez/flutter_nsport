@@ -34,6 +34,21 @@ class _TournamentsPageState extends State<TournamentsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        // body: CustomScrollView(
+        //   slivers: [
+        //     SliverList(
+        //         delegate: SliverChildBuilderDelegate(
+        //       childCount: tournametsData == null ? 0 : tournametsData.length,
+        //       (context, index) {
+        //         return Card(
+        //           child: Row(
+        //             children: <Widget>[Text("${tournametsData[index]["name"]}")],
+        //           ),
+        //         );
+        //       },
+        //     ))
+        //   ],
+        // ),
         body: ListView.builder(
       itemCount: tournametsData == null ? 0 : tournametsData.length,
       itemBuilder: (BuildContext context, int index) {

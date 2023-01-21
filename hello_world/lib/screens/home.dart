@@ -14,15 +14,26 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late Map data;
+  // late Map registerData;
   late List tournametsData = [];
+  // late List registerTournametsData = [];
 
   getTournamets() async {
-    http.Response response = await http.get("http://127.0.0.1:3000/pirlo");
+    http.Response response =
+        await http.get("http://127.0.0.1:3000/pirlo/match-page");
     data = json.decode(response.body);
     setState(() {
       tournametsData = data['data'];
     });
   }
+
+  // reloadTournamets() async {
+  //   http.Response response = await http.get("http://127.0.0.1:3000/pirlo/");
+  //   registerData = json.decode(response.body);
+  //   setState(() {
+  //     registerTournametsData = data['data'];
+  //   });
+  // }
 
   @override
   void initState() {
@@ -33,15 +44,25 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView.builder(
-      itemCount: tournametsData == null ? 0 : tournametsData.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Card(
-          child: Row(
-            children: <Widget>[Text("${tournametsData[index]}")],
-          ),
-        );
-      },
-    ));
+      body: ListView.builder(
+        itemCount: tournametsData == null ? 0 : tournametsData.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Card(
+            child: Row(
+              children: <Widget>[Text("${tournametsData[index]["game"]}")],
+            ),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.orange,
+        child: const Icon(
+          Icons.replay_rounded,
+        ),
+        onPressed: () {
+          print("Se toco el boton de recargar");
+        },
+      ),
+    );
   }
 }
