@@ -16,6 +16,7 @@ class _BottonNavigatorState extends State<BottonNavigator> {
   @override
   Widget build(BuildContext context) {
     return GNav(
+        backgroundColor: const Color.fromARGB(232, 0, 0, 0),
         selectedIndex: index,
         onTabChange: (int i) {
           setState(
@@ -27,18 +28,21 @@ class _BottonNavigatorState extends State<BottonNavigator> {
         },
         tabs: [
           GButton(
+            iconColor: Colors.white,
             icon: Icons.list_rounded,
             text: "Tournamets",
             iconActiveColor: Colors.orange,
             textColor: Colors.orange,
           ),
           GButton(
+            iconColor: Colors.white,
             icon: Icons.sports_soccer,
             text: "Home",
             iconActiveColor: Colors.orange,
             textColor: Colors.orange,
           ),
           GButton(
+            iconColor: Colors.white,
             icon: Icons.settings,
             text: "Settings",
             iconActiveColor: Colors.orange,

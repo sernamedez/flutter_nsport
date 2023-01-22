@@ -23,9 +23,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
     return MaterialApp(
-      title: 'App del cesar',
+      title: 'App test',
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Cesar manda'),
+      home: const MyHomePage(title: 'Test'),
     );
   }
 }
@@ -56,13 +56,21 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Principal Page"),
-        backgroundColor: Colors.orange,
-      ),
+      // appBar: AppBar(
+      //   title: const Text("Principal Page"),
+      //   backgroundColor: Colors.orange,
+      // ),
       endDrawer: const DrawerBotton(),
       bottomNavigationBar: myBN,
-      body: Routes(index: index),
+      body: Routes(
+        index: index,
+      ),
+      // decoration: const BoxDecoration(
+      //     image: DecorationImage(
+      //   image: AssetImage("images/a.png"),
+      //   fit: BoxFit.cover,
+      // )),
+      //Routes(index: index),
     );
   }
 }

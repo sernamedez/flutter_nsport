@@ -44,24 +44,52 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: tournametsData == null ? 0 : tournametsData.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-            child: Row(
-              children: <Widget>[Text("${tournametsData[index]["game"]}")],
-            ),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.orange,
-        child: const Icon(
-          Icons.replay_rounded,
+      // backgroundColor: Colors.black87,
+      body: Container(
+        // ignore: sort_child_properties_last
+        child: ListView.builder(
+          itemCount: tournametsData == null ? 0 : tournametsData.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Card(
+              color: const Color.fromARGB(0, 0, 0, 0),
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    const CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          "https://media-3.api-sports.io/football/leagues/4.png"),
+                    ),
+                    Center(
+                      child: Text(
+                        "${tournametsData[index]["game"]}",
+                        // textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            fontSize: 12.7,
+                            fontWeight: FontWeight.w800,
+                            color: Color.fromARGB(164, 255, 255, 255)),
+                      ),
+                    ),
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      // constraints: BoxConstraints(),
+                      onPressed: () {
+                        print("tv button");
+                      },
+                      icon: const Icon(Icons.tv),
+                      color: Colors.orange,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
         ),
-        onPressed: () {
-          print("Se toco el boton de recargar");
-        },
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+          image: AssetImage("images/a.png"),
+          fit: BoxFit.cover,
+        )),
       ),
     );
   }
