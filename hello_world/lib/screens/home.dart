@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/screens/match.dart';
 import 'package:hello_world/widgets/DrawerBotton.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
@@ -44,45 +45,88 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.black87,
       body: Container(
         // ignore: sort_child_properties_last
         child: ListView.builder(
           itemCount: tournametsData == null ? 0 : tournametsData.length,
           itemBuilder: (BuildContext context, int index) {
             return Card(
-              color: const Color.fromARGB(0, 0, 0, 0),
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    const CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          "https://media-3.api-sports.io/football/leagues/4.png"),
-                    ),
-                    Center(
-                      child: Text(
-                        "${tournametsData[index]["game"]}",
-                        // textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            fontSize: 12.7,
-                            fontWeight: FontWeight.w800,
-                            color: Color.fromARGB(164, 255, 255, 255)),
+                color: const Color.fromARGB(0, 0, 0, 0),
+                child: ListTile(
+                  leading: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    // crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 23,
+                        backgroundColor:
+                            const Color.fromARGB(99, 158, 158, 158),
+                        // backgroundImage:
+                        //     NetworkImage("${tournametsData[index]["img"]}"),
+
+                        child: ClipOval(
+                            child: Image.network(
+                          "${tournametsData[index]["img"]}",
+                          fit: BoxFit.cover,
+                          alignment: Alignment.center,
+                        )),
+                        // backgroundImage:
+                        //     NetworkImage("${tournametsData[index]["img"]}"),
                       ),
-                    ),
-                    IconButton(
-                      padding: EdgeInsets.zero,
-                      // constraints: BoxConstraints(),
-                      onPressed: () {
-                        print("tv button");
-                      },
-                      icon: const Icon(Icons.tv),
-                      color: Colors.orange,
-                    ),
-                  ],
-                ),
-              ),
-            );
+                    ],
+                  ),
+                  title: Text(
+                    "${tournametsData[index]["game"]}",
+                    // textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontSize: 12.7,
+                        fontWeight: FontWeight.w800,
+                        color: Color.fromARGB(164, 255, 255, 255)),
+                  ),
+                  subtitle: Text(
+                    "${tournametsData[index]["tournament"]}",
+                    style: const TextStyle(
+                        color: Color.fromARGB(66, 255, 255, 255)),
+                  ),
+                  trailing: const Icon(Icons.live_tv),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const MatchScreen()));
+                    print("${tournametsData[index]["game"]}");
+                  },
+                  iconColor: Colors.orange,
+                )
+                // child: Center(
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: <Widget>[
+                //       CircleAvatar(
+                //         radius: 23,
+                //         backgroundColor: Color.fromARGB(99, 158, 158, 158),
+                //         backgroundImage:
+                //             NetworkImage("${tournametsData[index]["img"]}"),
+                //       ),
+                //       Text(
+                //         "${tournametsData[index]["game"]}",
+                //         // textAlign: TextAlign.center,
+                //         style: const TextStyle(
+                //             fontSize: 12.7,
+                //             fontWeight: FontWeight.w800,
+                //             color: Color.fromARGB(164, 255, 255, 255)),
+                //       ),
+                //       IconButton(
+                //         padding: EdgeInsets.zero,
+                //         // constraints: BoxConstraints(),
+                //         onPressed: () {
+                //           print(tournametsData[index]);
+                //         },
+                //         icon: const Icon(Icons.tv),
+                //         color: Colors.orange,
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                );
           },
         ),
         decoration: const BoxDecoration(

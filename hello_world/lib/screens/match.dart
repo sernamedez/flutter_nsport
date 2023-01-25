@@ -35,18 +35,26 @@ class _MatchScreenState extends State<MatchScreen> {
       appBar: AppBar(
         title: const Text("xxxxxx vs xxxxxx"),
       ),
-      body: FutureBuilder(
-          future: _initializeVideoPlayerFuture,
-          builder: ((context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return AspectRatio(
-                aspectRatio: _videoControl.value.aspectRatio,
-                child: VideoPlayer(_videoControl),
-              );
-            } else {
-              return const Center(child: CircularProgressIndicator());
-            }
-          })),
+      body: Container(
+        // ignore: sort_child_properties_last
+        child: FutureBuilder(
+            future: _initializeVideoPlayerFuture,
+            builder: ((context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return AspectRatio(
+                  aspectRatio: _videoControl.value.aspectRatio,
+                  child: VideoPlayer(_videoControl),
+                );
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            })),
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+          image: AssetImage("images/a.png"),
+          fit: BoxFit.cover,
+        )),
+      ),
       drawer: const DrawerBotton(),
       floatingActionButton: FloatingActionButton(
         child: Icon(

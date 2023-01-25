@@ -1,16 +1,7 @@
-// import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:hello_world/widgets/DrawerBotton.dart';
 import 'package:hello_world/widgets/navigator/BottonNavigator.dart';
 import 'package:hello_world/widgets/navigator/Routes.dart';
-// import 'package:hello_world/screens/splash.dart';
-// ignore: import_of_legacy_library_into_null_safe
-// import 'package:http/http.dart' as http;
-// import 'dart:async';
-// import 'package:video_player/video_player.dart';
-// import 'package:hello_world/screens/match.dart';
-// import 'dart:convert';
 
 void main() {
   runApp(const MyApp());
@@ -21,11 +12,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_const_constructors
-    return MaterialApp(
-      title: 'App test',
+    return const MaterialApp(
+      color: Colors.orange,
+      title: 'nsportTV',
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Test'),
+      home: MyHomePage(title: 'nsportTV'),
     );
   }
 }
@@ -56,21 +47,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("Principal Page"),
-      //   backgroundColor: Colors.orange,
-      // ),
       endDrawer: const DrawerBotton(),
       bottomNavigationBar: myBN,
       body: Routes(
         index: index,
       ),
-      // decoration: const BoxDecoration(
-      //     image: DecorationImage(
-      //   image: AssetImage("images/a.png"),
-      //   fit: BoxFit.cover,
-      // )),
-      //Routes(index: index),
     );
   }
 }

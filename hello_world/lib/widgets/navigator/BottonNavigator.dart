@@ -28,21 +28,21 @@ class _BottonNavigatorState extends State<BottonNavigator> {
         },
         tabs: [
           GButton(
-            iconColor: Colors.white,
+            iconColor: Color.fromARGB(181, 255, 255, 255),
             icon: Icons.list_rounded,
             text: "Tournamets",
             iconActiveColor: Colors.orange,
             textColor: Colors.orange,
           ),
           GButton(
-            iconColor: Colors.white,
+            iconColor: Color.fromARGB(181, 255, 255, 255),
             icon: Icons.sports_soccer,
             text: "Home",
             iconActiveColor: Colors.orange,
             textColor: Colors.orange,
           ),
           GButton(
-            iconColor: Colors.white,
+            iconColor: Color.fromARGB(181, 255, 255, 255),
             icon: Icons.settings,
             text: "Settings",
             iconActiveColor: Colors.orange,

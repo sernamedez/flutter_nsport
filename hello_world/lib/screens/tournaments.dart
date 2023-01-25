@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/main.dart';
+import 'package:hello_world/screens/home.dart';
+import 'package:hello_world/screens/splash.dart';
 import 'package:hello_world/widgets/DrawerBotton.dart';
 import 'package:hello_world/widgets/navigator/Routes.dart';
 import 'dart:async';
@@ -51,26 +54,59 @@ class _TournamentsPageState extends State<TournamentsPage> {
       //           (context, index) {
       body: Container(
         // ignore: sort_child_properties_last
-        child: ListView.builder(
-          itemCount: tournametsData == null ? 0 : tournametsData.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              color: const Color.fromARGB(0, 0, 0, 0),
-              child: Row(
-                children: <Widget>[
-                  const Padding(padding: EdgeInsets.all(19.0)),
-                  Text(
-                    "${tournametsData[index]["name"]}",
-                    style: const TextStyle(
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w800,
-                        color: Color.fromARGB(148, 255, 255, 255)),
+        child: GridView.count(
+          crossAxisCount: 2,
+          children: List.generate(
+            tournametsData == null ? 0 : tournametsData.length,
+            (index) {
+              return Card(
+                color: Color.fromARGB(157, 158, 158, 158),
+                elevation: 10.0,
+                child: ListTile(
+                  title: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image(
+                        alignment: Alignment.center,
+                        image: NetworkImage(
+                            "${tournametsData[index]["imageSearch"]}"),
+                        // fit: BoxFit.cover,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            );
-          },
+                  onTap: () {
+                    print("${tournametsData[index]["name"]}");
+                    backgroundColor:
+                    Colors.amber;
+                  },
+                  // textAlign: TextAlign.center,
+                ),
+              );
+            },
+          ),
         ),
+        // ignore: sort_child_properties_last
+        // child: ListView.builder(
+        //   itemCount: tournametsData == null ? 0 : tournametsData.length,
+        //   itemBuilder: (BuildContext context, int index) {
+        //     return Card(
+        //       color: const Color.fromARGB(0, 0, 0, 0),
+        //       child: ListTile(
+        //         // const Padding(padding: EdgeInsets.all(19.0)),
+        //         title: Text(
+        //           "${tournametsData[index]["name"]}",
+        //           style: const TextStyle(
+        //               fontSize: 14.0,
+        //               fontWeight: FontWeight.w800,
+        //               color: Color.fromARGB(148, 255, 255, 255)),
+        //         ),
+        //         onTap: () {
+        //           print("${tournametsData[index]["name"]}");
+        //         },
+        //       ),
+        //     );
+        //   },
+        // ),
         decoration: const BoxDecoration(
             image: DecorationImage(
           image: AssetImage("images/a.png"),
@@ -81,8 +117,8 @@ class _TournamentsPageState extends State<TournamentsPage> {
       floatingActionButton: FloatingActionButton.extended(
           backgroundColor: Colors.orange,
           onPressed: () {
-            print("Boton continuar");
-            Routes(index: 1);
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const SplashScreen()));
           },
           label: Row(
             children: [Text("SAVE"), Icon(Icons.arrow_right)],
