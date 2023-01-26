@@ -60,7 +60,7 @@ class _TournamentsPageState extends State<TournamentsPage> {
             tournametsData == null ? 0 : tournametsData.length,
             (index) {
               return Card(
-                color: Color.fromARGB(157, 158, 158, 158),
+                color: const Color.fromARGB(157, 158, 158, 158),
                 elevation: 10.0,
                 child: ListTile(
                   title: Column(

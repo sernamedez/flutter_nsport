@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/screens/match.dart';
+import 'package:hello_world/screens/splash.dart';
 import 'package:hello_world/widgets/DrawerBotton.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
@@ -54,11 +55,11 @@ class _HomePageState extends State<HomePage> {
                 color: const Color.fromARGB(0, 0, 0, 0),
                 child: ListTile(
                   leading: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CircleAvatar(
-                        radius: 23,
+                        radius: 25,
                         backgroundColor:
                             const Color.fromARGB(99, 158, 158, 158),
                         // backgroundImage:
@@ -88,10 +89,32 @@ class _HomePageState extends State<HomePage> {
                     style: const TextStyle(
                         color: Color.fromARGB(66, 255, 255, 255)),
                   ),
-                  trailing: const Icon(Icons.live_tv),
+                  trailing: (tournametsData[index]["state"]) == "live"
+                      ? const Icon(
+                          Icons.live_tv,
+                          color: Colors.orange,
+                        )
+                      : (tournametsData[index]["state"]) == "offline"
+                          ? const Icon(
+                              Icons.tv_off,
+                              color: Color.fromARGB(118, 255, 255, 255),
+                            )
+                          : const Text(
+                              "15:30",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  color: Color.fromARGB(118, 255, 255, 255)),
+                            ),
+
+                  // const Icon(Icons.live_tv),
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const MatchScreen()));
+                    if ((tournametsData[index]["state"]) == "live") {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const MatchScreen()));
+                    } else if ((tournametsData[index]["state"]) == "offline") {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const SplashScreen()));
+                    }
                     print("${tournametsData[index]["game"]}");
                   },
                   iconColor: Colors.orange,

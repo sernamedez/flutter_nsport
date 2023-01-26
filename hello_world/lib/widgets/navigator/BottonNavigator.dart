@@ -26,22 +26,23 @@ class _BottonNavigatorState extends State<BottonNavigator> {
             },
           );
         },
+        // ignore: prefer_const_literals_to_create_immutables
         tabs: [
-          GButton(
+          const GButton(
             iconColor: Color.fromARGB(181, 255, 255, 255),
             icon: Icons.list_rounded,
             text: "Tournamets",
             iconActiveColor: Colors.orange,
             textColor: Colors.orange,
           ),
-          GButton(
+          const GButton(
             iconColor: Color.fromARGB(181, 255, 255, 255),
             icon: Icons.sports_soccer,
             text: "Home",
             iconActiveColor: Colors.orange,
             textColor: Colors.orange,
           ),
-          GButton(
+          const GButton(
             iconColor: Color.fromARGB(181, 255, 255, 255),
             icon: Icons.settings,
             text: "Settings",
