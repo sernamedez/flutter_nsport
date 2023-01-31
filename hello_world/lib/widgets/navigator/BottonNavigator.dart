@@ -30,15 +30,15 @@ class _BottonNavigatorState extends State<BottonNavigator> {
         tabs: [
           const GButton(
             iconColor: Color.fromARGB(181, 255, 255, 255),
-            icon: Icons.list_rounded,
-            text: "Tournamets",
+            icon: Icons.tv,
+            text: "Matches",
             iconActiveColor: Colors.orange,
             textColor: Colors.orange,
           ),
           const GButton(
             iconColor: Color.fromARGB(181, 255, 255, 255),
             icon: Icons.sports_soccer,
-            text: "Home",
+            text: "Tournamets",
             iconActiveColor: Colors.orange,
             textColor: Colors.orange,
           ),

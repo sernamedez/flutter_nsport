@@ -21,8 +21,8 @@ class _HomePageState extends State<HomePage> {
   // late List registerTournametsData = [];
 
   getTournamets() async {
-    http.Response response =
-        await http.get("http://127.0.0.1:3000/pirlo/match-page");
+    var url = "http://127.0.0.1:3000/pirlo/match-page";
+    http.Response response = await http.get(Uri.parse(url));
     data = json.decode(response.body);
     setState(() {
       tournametsData = data['data'];
@@ -70,6 +70,12 @@ class _HomePageState extends State<HomePage> {
                           "${tournametsData[index]["img"]}",
                           fit: BoxFit.cover,
                           alignment: Alignment.center,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              "images/nof.PNG",
+                              fit: BoxFit.contain,
+                            );
+                          },
                         )),
                         // backgroundImage:
                         //     NetworkImage("${tournametsData[index]["img"]}"),
@@ -84,33 +90,29 @@ class _HomePageState extends State<HomePage> {
                         fontWeight: FontWeight.w800,
                         color: Color.fromARGB(164, 255, 255, 255)),
                   ),
+                  onLongPress: () => print("oo"),
                   subtitle: Text(
                     "${tournametsData[index]["tournament"]}",
                     style: const TextStyle(
                         color: Color.fromARGB(66, 255, 255, 255)),
                   ),
-                  trailing: (tournametsData[index]["state"]) == "live"
+                  trailing: (tournametsData[index]["stream"]) != null
                       ? const Icon(
                           Icons.live_tv,
                           color: Colors.orange,
                         )
-                      : (tournametsData[index]["state"]) == "offline"
-                          ? const Icon(
-                              Icons.tv_off,
-                              color: Color.fromARGB(118, 255, 255, 255),
-                            )
-                          : const Text(
-                              "15:30",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                  color: Color.fromARGB(118, 255, 255, 255)),
-                            ),
+                      : Text(
+                          "${tournametsData[index]["state"]}",
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w800,
+                              color: Color.fromARGB(118, 255, 255, 255)),
+                        ),
 
                   // const Icon(Icons.live_tv),
                   onTap: () {
                     if ((tournametsData[index]["state"]) == "live") {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const MatchScreen()));
+                          builder: (context) => MatchScreen()));
                     } else if ((tournametsData[index]["state"]) == "offline") {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const SplashScreen()));

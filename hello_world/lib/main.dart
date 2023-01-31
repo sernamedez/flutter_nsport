@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: const DrawerBotton(),
+      // endDrawer: const DrawerBotton(),
       bottomNavigationBar: myBN,
       body: Routes(
         index: index,

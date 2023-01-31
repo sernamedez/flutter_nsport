@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/widgets/navigator/BottonNavigator.dart';
-import 'package:hello_world/widgets/navigator/Routes.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     myBN = BottonNavigator(currentIndex: (i) {
       setState(() {
-        index = 1;
+        index = i;
       });
     });
     super.initState();
@@ -26,10 +25,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: myBN,
-      body: Routes(
-        index: index,
-      ),
-    );
+        body: Container(
+      color: Colors.black26,
+    ));
   }
 }

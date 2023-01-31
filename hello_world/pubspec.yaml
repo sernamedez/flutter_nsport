@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   http: any
+  video_player_web_hls: ^1.0.0+2
   video_player: any
   google_nav_bar: any
   settings_ui: any

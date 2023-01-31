@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/main.dart';
-import 'package:hello_world/screens/home.dart';
-import 'package:hello_world/screens/splash.dart';
-import 'package:hello_world/widgets/DrawerBotton.dart';
-import 'package:hello_world/widgets/navigator/Routes.dart';
-import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'package:video_player/video_player.dart';
 import 'dart:convert';
-import 'package:hello_world/widgets/navigator/Routes.dart';
 
 class TournamentsPage extends StatefulWidget {
   const TournamentsPage({super.key});
@@ -23,8 +16,8 @@ class _TournamentsPageState extends State<TournamentsPage> {
   late int index;
 
   getTournamets() async {
-    http.Response response =
-        await http.get("http://127.0.0.1:3000/tournamets/tournamets-page");
+    http.Response response = await http
+        .get(Uri.parse('http://127.0.0.1:3000/tournamets/tournamets-page'));
     data = json.decode(response.body);
     setState(() {
       tournametsData = data['data'];
@@ -40,6 +33,7 @@ class _TournamentsPageState extends State<TournamentsPage> {
     super.initState();
   }
 
+  List<String> tournaments = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +55,7 @@ class _TournamentsPageState extends State<TournamentsPage> {
             (index) {
               return Card(
                 color: const Color.fromARGB(157, 158, 158, 158),
+                // shadowColor: Colors.orange,
                 elevation: 10.0,
                 child: ListTile(
                   title: Column(
@@ -70,14 +65,36 @@ class _TournamentsPageState extends State<TournamentsPage> {
                         alignment: Alignment.center,
                         image: NetworkImage(
                             "${tournametsData[index]["imageSearch"]}"),
-                        // fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            "images/nof.PNG",
+                            fit: BoxFit.contain,
+                          );
+                        },
+                      ),
+                      Icon(
+                        (tournametsData[index]["name"]) == "Serie A"
+                            ? (Icons.check)
+                            : (Icons.clear),
+                        color: Colors.orange,
                       ),
                     ],
                   ),
+                  // leading: (tournametsData[index]["name"]) == "Serie A"
+                  //     ? const Icon(
+                  //         Icons.check,
+                  //         color: Colors.orange,
+                  //       )
+                  //     : const Icon(
+                  //         Icons.check,
+                  //         color: Colors.grey,
+                  //       ),
+
                   onTap: () {
-                    print("${tournametsData[index]["name"]}");
-                    backgroundColor:
-                    Colors.amber;
+                    dynamic torneo = "${tournametsData[index]["name"]}";
+                    setState(() {});
+                    tournaments.add(torneo);
+                    print(tournaments);
                   },
                   // textAlign: TextAlign.center,
                 ),
@@ -117,11 +134,11 @@ class _TournamentsPageState extends State<TournamentsPage> {
       floatingActionButton: FloatingActionButton.extended(
           backgroundColor: Colors.orange,
           onPressed: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const SplashScreen()));
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const MyHomePage(title: "nsportTV")));
           },
           label: Row(
-            children: [Text("SAVE"), Icon(Icons.arrow_right)],
+            children: const [Text("SAVE")],
           )),
     );
   }

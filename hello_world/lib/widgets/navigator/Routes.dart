@@ -10,8 +10,8 @@ class Routes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> screens = [
-      const TournamentsPage(),
       const HomePage(),
+      const TournamentsPage(),
       const SettingsPage()
     ];
     return screens[index];
