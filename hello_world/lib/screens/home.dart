@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   // late List registerTournametsData = [];
 
   getTournamets() async {
-    var url = "http://127.0.0.1:3000/pirlo/match-page";
+    String url = "http://127.0.0.1:3000/pirlo/match-page";
     http.Response response = await http.get(Uri.parse(url));
     data = json.decode(response.body);
     setState(() {
@@ -88,15 +88,15 @@ class _HomePageState extends State<HomePage> {
                     style: const TextStyle(
                         fontSize: 12.7,
                         fontWeight: FontWeight.w800,
-                        color: Color.fromARGB(164, 255, 255, 255)),
+                        color: Color.fromARGB(169, 255, 255, 255)),
                   ),
-                  onLongPress: () => print("oo"),
+                  onLongPress: () => print(tournametsData[index]),
                   subtitle: Text(
                     "${tournametsData[index]["tournament"]}",
                     style: const TextStyle(
-                        color: Color.fromARGB(66, 255, 255, 255)),
+                        color: Color.fromARGB(87, 255, 255, 255)),
                   ),
-                  trailing: (tournametsData[index]["stream"]) != null
+                  trailing: (tournametsData[index]["stream"]) != ""
                       ? const Icon(
                           Icons.live_tv,
                           color: Colors.orange,
@@ -110,14 +110,17 @@ class _HomePageState extends State<HomePage> {
 
                   // const Icon(Icons.live_tv),
                   onTap: () {
-                    if ((tournametsData[index]["state"]) == "live") {
+                    dynamic stream = (tournametsData[index]["stream"]);
+                    dynamic game = (tournametsData[index]["game"]);
+                    print(stream.runtimeType);
+                    if ((tournametsData[index]["stream"]) != "") {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => MatchScreen()));
-                    } else if ((tournametsData[index]["state"]) == "offline") {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const SplashScreen()));
+                          builder: (context) => MatchScreen(
+                                title: game,
+                                stream: stream,
+                              )));
                     }
-                    print("${tournametsData[index]["game"]}");
+                    // print("${tournametsData[index]["game"]}");
                   },
                   iconColor: Colors.orange,
                 )

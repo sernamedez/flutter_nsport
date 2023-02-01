@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/widgets/navigator/BottonNavigator.dart';
-import 'package:hello_world/widgets/DrawerBotton.dart';
 import 'dart:async';
 import 'package:video_player/video_player.dart';
 
 class MatchScreen extends StatefulWidget {
+  const MatchScreen({super.key, required this.title, required this.stream});
+  final String title;
+  final String stream;
   @override
   State<MatchScreen> createState() => _MatchScreenState();
 }
@@ -15,8 +16,7 @@ class _MatchScreenState extends State<MatchScreen> {
 
   @override
   void initState() {
-    _videoControl = VideoPlayerController.network(
-        "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4");
+    _videoControl = VideoPlayerController.network(widget.stream);
     _initializeVideoPlayerFuture = _videoControl.initialize();
     super.initState();
   }
@@ -30,9 +30,10 @@ class _MatchScreenState extends State<MatchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(99, 158, 158, 158),
       appBar: AppBar(
-        backgroundColor: Colors.orange,
-        title: const Text("En vivo"),
+        backgroundColor: const Color.fromARGB(232, 0, 0, 0),
+        title: Text(widget.title, style: const TextStyle(color: Colors.orange)),
       ),
       body: Container(
         // ignore: sort_child_properties_last
@@ -45,42 +46,22 @@ class _MatchScreenState extends State<MatchScreen> {
                   child: VideoPlayer(_videoControl),
                 );
               } else {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: Text("Negativo"));
               }
             })),
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage("images/a.png"),
-          fit: BoxFit.cover,
-        )),
+        // decoration: const BoxDecoration(
+        //     image: DecorationImage(
+        //   image: AssetImage("images/a.png"),
+        //   fit: BoxFit.cover,
+        // )),
       ),
-      //// Desde aqui
-      // body: YoYoPlayer(
-      //   aspectRatio: 16 / 9,
-      //   //url ( .m3u8 video streaming link )
-      //   //example ( url :"https://sfux-ext.sfux.info/hls/chapter/105/1588724110/1588724110.m3u8" )
-      //   //example ( url :"https://player.vimeo.com/external/440218055.m3u8?s=7ec886b4db9c3a52e0e7f5f917ba7287685ef67f&oauth2_token_id=1360367101" )
-      //   url: "https://s4.flowerscast.com:999/hls/extremotvhuawei.m3u8",
-      //   // videoStyle: VideoStyle(),
-      //   // videoLoadingStyle: VideoLoadingStyle(
-      //   //   loading: Center(
-      //   //     child: Text("Loading video"),
-      // ),
-      // // ),
-      // // subtitle ( ...srt subtitle link )
-      // // example ( subtitle:"https://eboxmovie.sgp1.digitaloceanspaces.com/mmmmtest.srt")
-      // // subtitle: "",
-      // // subtitle style
-      // // subtitleStyle: SubtitleStyle(),
-      // // ),
-      // drawer: const DrawerBotton(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange,
         child: Icon(
           _videoControl.value.isPlaying ? Icons.pause : Icons.play_arrow,
         ),
         onPressed: () {
-          print("Se toco el boton");
+          print("Tap en reproducir matchpage");
           setState(() {
             if (_videoControl.value.isPlaying) {
               _videoControl.pause();
@@ -90,7 +71,6 @@ class _MatchScreenState extends State<MatchScreen> {
           });
         },
       ),
-      // bottomNavigationBar: const BottonNavigator(),
     );
   }
 }
