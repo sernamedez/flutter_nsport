@@ -36,6 +36,11 @@ class _MatchScreenState extends State<MatchScreen> {
         title: Text(widget.title, style: const TextStyle(color: Colors.orange)),
       ),
       body: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+          image: AssetImage("assets/a.png"),
+          fit: BoxFit.cover,
+        )),
         // ignore: sort_child_properties_last
         child: FutureBuilder(
             future: _initializeVideoPlayerFuture,
@@ -46,7 +51,10 @@ class _MatchScreenState extends State<MatchScreen> {
                   child: VideoPlayer(_videoControl),
                 );
               } else {
-                return const Center(child: Text("Negativo"));
+                return const Center(
+                  child:
+                      Text("Loading...", style: TextStyle(color: Colors.white)),
+                );
               }
             })),
         // decoration: const BoxDecoration(

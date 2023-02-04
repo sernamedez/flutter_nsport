@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/main.dart';
+import 'package:hello_world/widgets/DrawerBotton.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -37,6 +38,13 @@ class _TournamentsPageState extends State<TournamentsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(232, 0, 0, 0),
+        title: const Text("Select your favorites",
+            style: TextStyle(color: Colors.orange)),
+      ),
+      endDrawer: const DrawerBotton(),
+
       // body: Container(
       //   // ignore: sort_child_properties_last
       //   child: CustomScrollView(
@@ -55,9 +63,13 @@ class _TournamentsPageState extends State<TournamentsPage> {
             (index) {
               return Card(
                 color: const Color.fromARGB(157, 158, 158, 158),
+                // shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(68)),
                 // shadowColor: Colors.orange,
                 elevation: 10.0,
                 child: ListTile(
+                  // shape: RoundedRectangleBorder(
+                  //     borderRadius: BorderRadius.circular(68)),
                   title: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -67,7 +79,7 @@ class _TournamentsPageState extends State<TournamentsPage> {
                             "${tournametsData[index]["imageSearch"]}"),
                         errorBuilder: (context, error, stackTrace) {
                           return Image.asset(
-                            "images/nof.PNG",
+                            "assets/nof.PNG",
                             fit: BoxFit.contain,
                           );
                         },
@@ -126,7 +138,7 @@ class _TournamentsPageState extends State<TournamentsPage> {
         // ),
         decoration: const BoxDecoration(
             image: DecorationImage(
-          image: AssetImage("images/a.png"),
+          image: AssetImage("assets/a.png"),
           fit: BoxFit.cover,
         )),
       ),

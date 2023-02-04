@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/screens/home.dart';
 import 'package:hello_world/screens/settings.dart';
+import 'package:hello_world/screens/testTournament.dart';
 import 'package:hello_world/screens/tournaments.dart';
 
 class Routes extends StatelessWidget {
@@ -10,7 +11,9 @@ class Routes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> screens = [
-      const HomePage(),
+      // const MainMatches(),
+      const HomePage(personal: ""),
+      const Test(),
       const TournamentsPage(),
       const SettingsPage()
     ];
